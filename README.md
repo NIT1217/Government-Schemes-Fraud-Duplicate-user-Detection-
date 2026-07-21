@@ -1,7 +1,7 @@
 # Government-Schemes-Fraud-Duplicate-user-Detection-
 The website catches the fraud users of government schemes along with duplicate users
 
-📌 Problem Statement
+<h2>📌 Problem Statement</h2>
 
 India's 63 million+ MSMEs and welfare beneficiaries are served through overlapping schemes like PM-KISAN, PM Awas Yojana, MGNREGS, and PM-JAY. A persistent challenge is duplicate and fraudulent applications — the same individual applying under slightly different names, addresses, or forged Aadhaar numbers across multiple schemes.
 
@@ -13,7 +13,7 @@ This project builds a multi-modal fraud detection engine that flags likely dupli
 🗄️ Vector database ANN search (ChromaDB / Pinecone)
 ⚖️ Weighted score fusion with a trained meta-classifier (scikit-learn)
 
-🏗️ System Architecture
+<h2>🏗️ System Architecture</h2>
 
 <div align="center">
 
@@ -105,99 +105,78 @@ Flag · Confidence Score · Duplicate Pairs
 </table>
 
 </div>
-🗂️ Project Structure
-<h2>📁 Project Structure</h2>
 
-<ul>
-    <li>
-        <b>fraud-detector/</b>
-        <ul>
-            <li>
-                <b>data/</b>
-                <ul>
-                    <li><code>generate_dataset.py</code> – Synthetic PM-scheme applicant generator</li>
-                    <li><code>applicants.csv</code> – Generated dataset (5000 records)</li>
-                    <li><code>fraud_pairs.csv</code> – Labelled duplicate pairs for training</li>
-                </ul>
-            </li>
 
-            <li>
-                <b>embeddings/</b>
-                <ul>
-                    <li><code>face_encoder.py</code> – InsightFace buffalo_l wrapper</li>
-                    <li><code>text_encoder.py</code> – Optional sentence-transformer embeddings</li>
-                </ul>
-            </li>
+<h2>📦 Datasets Used</h2>
 
-            <li>
-                <b>vector_store/</b>
-                <ul>
-                    <li><code>chroma_store/</code> – Persisted ChromaDB collection</li>
-                </ul>
-            </li>
+<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; text-align: left;">
+    <thead>
+        <tr>
+            <th>Module</th>
+            <th>Dataset</th>
+            <th>Source</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Face similarity benchmark</td>
+            <td>LFW — Labeled Faces in the Wild</td>
+            <td>Kaggle · Official</td>
+        </tr>
+        <tr>
+            <td>Face positive pairs</td>
+            <td>CelebFaces Attributes (CelebA)</td>
+            <td>Kaggle</td>
+        </tr>
+        <tr>
+            <td>Demographic fairness eval</td>
+            <td>UTKFace</td>
+            <td>Kaggle</td>
+        </tr>
+        <tr>
+            <td>Fake photo detection</td>
+            <td>140k Real &amp; Fake Faces</td>
+            <td>Kaggle</td>
+        </tr>
+        <tr>
+            <td>Document fraud</td>
+            <td>IDNet Identity Documents</td>
+            <td>Kaggle</td>
+        </tr>
+        <tr>
+            <td>Face embedding eval</td>
+            <td>CASIA-WebFace</td>
+            <td>InsightFace Zoo</td>
+        </tr>
+        <tr>
+            <td>Name fuzzy threshold</td>
+            <td>Fuzzy Name Matching</td>
+            <td>Kaggle</td>
+        </tr>
+        <tr>
+            <td>Indian name variants</td>
+            <td>Indian Names Dataset</td>
+            <td>Kaggle</td>
+        </tr>
+        <tr>
+            <td>Address fuzzy matching</td>
+            <td>India Pin Code Directory</td>
+            <td>data.gov.in</td>
+        </tr>
+        <tr>
+            <td>Fraud label schema</td>
+            <td>Healthcare Provider Fraud</td>
+            <td>Kaggle</td>
+        </tr>
+        <tr>
+            <td>Scheme context</td>
+            <td>Udyam MSME Registration</td>
+            <td>Kaggle</td>
+        </tr>
+    </tbody>
+</table>
 
-            <li>
-                <b>matching/</b>
-                <ul>
-                    <li><code>fuzzy_match.py</code> – RapidFuzz name &amp; address scoring</li>
-                    <li><code>aadhaar_check.py</code> – Hash comparison &amp; Hamming distance</li>
-                    <li><code>score_fusion.py</code> – Weighted ensemble + sklearn classifier</li>
-                </ul>
-            </li>
-
-            <li>
-                <b>api/</b>
-                <ul>
-                    <li><code>app.py</code> – Flask REST API (check &amp; index endpoints)</li>
-                </ul>
-            </li>
-
-            <li>
-                <b>dashboard/</b>
-                <ul>
-                    <li><code>review_ui.py</code> – Streamlit admin review panel</li>
-                </ul>
-            </li>
-
-            <li>
-                <b>models/</b>
-                <ul>
-                    <li><code>fraud_clf.pkl</code> – Trained meta-classifier</li>
-                </ul>
-            </li>
-
-            <li>
-                <b>notebooks/</b>
-                <ul>
-                    <li><code>eda_and_eval.ipynb</code> – Exploratory analysis &amp; evaluation</li>
-                </ul>
-            </li>
-
-            <li><b>datasets/</b> – Downloaded public datasets (gitignored)</li>
-            <li><code>requirements.txt</code></li>
-            <li><code>.env.example</code></li>
-            <li><code>Dockerfile</code></li>
-            <li><code>README.md</code></li>
-        </ul>
-    </li>
-</ul>
-
-📦 Datasets Used
-
-Module	Dataset	Source
-Face similarity benchmark	LFW — Labeled Faces in the Wild	Kaggle · Official
-Face positive pairs	CelebFaces Attributes (CelebA)	Kaggle
-Demographic fairness eval	UTKFace	Kaggle
-Fake photo detection	140k Real & Fake Faces	Kaggle
-Document fraud	IDNet Identity Documents	Kaggle
-Face embedding eval	CASIA-WebFace	InsightFace Zoo
-Name fuzzy threshold	Fuzzy Name Matching	Kaggle
-Indian name variants	Indian Names Dataset	Kaggle
-Address fuzzy matching	India Pin Code Directory	data.gov.in
-Fraud label schema	Healthcare Provider Fraud	Kaggle
-Scheme context	Udyam MSME Registration	Kaggle
-
-<h3>⚙️ Tech Stack</h3>.
+<h2>⚙️ Tech Stack</h2>.
 
 <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; text-align: left;">
     <thead>
