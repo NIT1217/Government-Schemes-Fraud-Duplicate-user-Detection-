@@ -15,66 +15,172 @@ This project builds a multi-modal fraud detection engine that flags likely dupli
 
 🏗️ System Architecture
 
-Scheme Application Input
-(name · address · Aadhaar hash · photo)
-          │
-          ▼
-  Preprocessing & Normalisation
-          │
-    ┌─────┼─────────────┐
-    ▼     ▼             ▼
-Face    Fuzzy Text    Aadhaar
-Embed   Match         Hash
-(512-d) (RapidFuzz)  (SHA-256)
-    └─────┼─────────────┘
-          ▼
-  Vector DB — Similarity Search
-  (ChromaDB · cosine ANN · top-k)
-          │
-          ▼
-   Score Fusion Layer
-   (weighted ensemble → fraud probability)
-          │
-          ▼
-  Flask REST API + Streamlit Dashboard
-  (flag · confidence score · duplicate pairs)
+<div align="center">
 
+<table>
+<tr>
+<td align="center"><b>Scheme Application Input</b><br>
+Name · Address · Aadhaar Hash · Photo
+</td>
+</tr>
+
+<tr>
+<td align="center">⬇️</td>
+</tr>
+
+<tr>
+<td align="center"><b>Preprocessing &amp; Normalisation</b></td>
+</tr>
+
+<tr>
+<td align="center">⬇️</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<table>
+<tr>
+<th>Face</th>
+<th>Fuzzy Text</th>
+<th>Aadhaar</th>
+</tr>
+
+<tr>
+<td align="center">
+Face Embedding<br>
+(512-d)
+</td>
+
+<td align="center">
+RapidFuzz<br>
+Levenshtein +<br>
+Jaro-Winkler
+</td>
+
+<td align="center">
+SHA-256<br>
+Hash
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">⬇️</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>Vector Database</b><br>
+ChromaDB · Cosine ANN · Top-k Similarity Search
+</td>
+</tr>
+
+<tr>
+<td align="center">⬇️</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>Score Fusion Layer</b><br>
+Weighted Ensemble → Fraud Probability
+</td>
+</tr>
+
+<tr>
+<td align="center">⬇️</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>Flask REST API + Streamlit Dashboard</b><br>
+Flag · Confidence Score · Duplicate Pairs
+</td>
+</tr>
+
+</table>
+
+</div>
 🗂️ Project Structure
-fraud-detector/
-├── data/
-│   ├── generate_dataset.py        # Synthetic PM-scheme applicant generator
-│   ├── applicants.csv             # Generated dataset (5000 records)
-│   └── fraud_pairs.csv            # Labelled duplicate pairs for training
-│
-├── embeddings/
-│   ├── face_encoder.py            # InsightFace buffalo_l wrapper
-│   └── text_encoder.py            # Optional sentence-transformer embeddings
-│
-├── vector_store/
-│   └── chroma_store/              # Persisted ChromaDB collection
-│
-├── matching/
-│   ├── fuzzy_match.py             # RapidFuzz name + address scoring
-│   ├── aadhaar_check.py           # Hash comparison + Hamming distance
-│   └── score_fusion.py            # Weighted ensemble + sklearn classifier
-│
-├── api/
-│   └── app.py                     # Flask REST API (check + index endpoints)
-│
-├── dashboard/
-│   └── review_ui.py               # Streamlit admin review panel
-│
-├── models/
-│   └── fraud_clf.pkl              # Trained meta-classifier
-│
-├── notebooks/
-│   └── eda_and_eval.ipynb         # Exploratory analysis + evaluation
-│
-├── datasets/                      # Downloaded public datasets (gitignored)
-├── requirements.txt
-├── .env.example
-├── Dockerfile
-└── README.md
+<h2>📁 Project Structure</h2>
+
+<ul>
+    <li>
+        <b>fraud-detector/</b>
+        <ul>
+            <li>
+                <b>data/</b>
+                <ul>
+                    <li><code>generate_dataset.py</code> – Synthetic PM-scheme applicant generator</li>
+                    <li><code>applicants.csv</code> – Generated dataset (5000 records)</li>
+                    <li><code>fraud_pairs.csv</code> – Labelled duplicate pairs for training</li>
+                </ul>
+            </li>
+
+            <li>
+                <b>embeddings/</b>
+                <ul>
+                    <li><code>face_encoder.py</code> – InsightFace buffalo_l wrapper</li>
+                    <li><code>text_encoder.py</code> – Optional sentence-transformer embeddings</li>
+                </ul>
+            </li>
+
+            <li>
+                <b>vector_store/</b>
+                <ul>
+                    <li><code>chroma_store/</code> – Persisted ChromaDB collection</li>
+                </ul>
+            </li>
+
+            <li>
+                <b>matching/</b>
+                <ul>
+                    <li><code>fuzzy_match.py</code> – RapidFuzz name &amp; address scoring</li>
+                    <li><code>aadhaar_check.py</code> – Hash comparison &amp; Hamming distance</li>
+                    <li><code>score_fusion.py</code> – Weighted ensemble + sklearn classifier</li>
+                </ul>
+            </li>
+
+            <li>
+                <b>api/</b>
+                <ul>
+                    <li><code>app.py</code> – Flask REST API (check &amp; index endpoints)</li>
+                </ul>
+            </li>
+
+            <li>
+                <b>dashboard/</b>
+                <ul>
+                    <li><code>review_ui.py</code> – Streamlit admin review panel</li>
+                </ul>
+            </li>
+
+            <li>
+                <b>models/</b>
+                <ul>
+                    <li><code>fraud_clf.pkl</code> – Trained meta-classifier</li>
+                </ul>
+            </li>
+
+            <li>
+                <b>notebooks/</b>
+                <ul>
+                    <li><code>eda_and_eval.ipynb</code> – Exploratory analysis &amp; evaluation</li>
+                </ul>
+            </li>
+
+            <li><b>datasets/</b> – Downloaded public datasets (gitignored)</li>
+            <li><code>requirements.txt</code></li>
+            <li><code>.env.example</code></li>
+            <li><code>Dockerfile</code></li>
+            <li><code>README.md</code></li>
+        </ul>
+    </li>
+</ul>
 
 📦 Datasets Used
 
