@@ -91,97 +91,56 @@ Address fuzzy matching	India Pin Code Directory	data.gov.in
 Fraud label schema	Healthcare Provider Fraud	Kaggle
 Scheme context	Udyam MSME Registration	Kaggle
 
-⚙️ Tech Stack
+<h3>⚙️ Tech Stack</h3>.
 
-Layer	Technology
-Face embeddings	InsightFace buffalo_l (512-d ArcFace)
-Fuzzy text matching	RapidFuzz (Levenshtein + Jaro-Winkler)
-Vector database	ChromaDB (local) → Pinecone (production)
-ML classifier	scikit-learn LogisticRegression / XGBoost
-API	Flask + Flask-RESTful
-Dashboard	Streamlit
-Data generation	Faker en_IN + NumPy
-Storage	SQLite (dev) / PostgreSQL (prod)
-Image augmentation	Albumentations
+<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; text-align: left;">
+    <thead>
+        <tr>
+            <th>Layer</th>
+            <th>Technology</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Face embeddings</td>
+            <td>InsightFace buffalo_l (512-d ArcFace)</td>
+        </tr>
+        <tr>
+            <td>Fuzzy text matching</td>
+            <td>RapidFuzz (Levenshtein + Jaro-Winkler)</td>
+        </tr>
+        <tr>
+            <td>Vector database</td>
+            <td>ChromaDB (local) → Pinecone (production)</td>
+        </tr>
+        <tr>
+            <td>ML classifier</td>
+            <td>scikit-learn LogisticRegression / XGBoost</td>
+        </tr>
+        <tr>
+            <td>API</td>
+            <td>Flask + Flask-RESTful</td>
+        </tr>
+        <tr>
+            <td>Dashboard</td>
+            <td>Streamlit</td>
+        </tr>
+        <tr>
+            <td>Data generation</td>
+            <td>Faker en_IN + NumPy</td>
+        </tr>
+        <tr>
+            <td>Storage</td>
+            <td>SQLite (dev) / PostgreSQL (prod)</td>
+        </tr>
+        <tr>
+            <td>Image augmentation</td>
+            <td>Albumentations</td>
+        </tr>
+    </tbody>
+</table>
 
-🚀 Setup & Installation
-
-Prerequisites
-Python 3.10+
-pip or conda
-(Optional) CUDA GPU for faster face embedding inference
-1. Clone the repository
-bash
-git clone https://github.com/<your-username>/fraud-detector.git
-cd fraud-detector
-2. Install dependencies
-bash
-pip install -r requirements.txt
-3. Download InsightFace model
-python
-from insightface.app import FaceAnalysis
-app = FaceAnalysis(name='buffalo_l')
-app.prepare(ctx_id=0, det_size=(640, 640))
-# Model downloads automatically on first run (~200MB)
-4. Generate the synthetic dataset
-bash
-python data/generate_dataset.py --records 5000 --fraud-rate 0.15
-5. Index applicants into ChromaDB
-bash
-python embeddings/face_encoder.py --index-all
-6. Train the meta-classifier
-bash
-python matching/score_fusion.py --train
-7. Start the API
-bash
-flask --app api/app.py run --port 5000
-8. Launch the review dashboard
-bash
-streamlit run dashboard/review_ui.py
-🔌 API Reference
-POST /index
-
-Index a new applicant into the vector store.
-
-json
-// Request
-{
-  "id": "uuid-string",
-  "name": "Ramesh Kumar",
-  "address": "12, MG Road, Chennai, TN 600001",
-  "aadhaar_hash": "sha256-hex-string",
-  "scheme": "PM-KISAN",
-  "photo_path": "photos/uuid.jpg"
-}
-
-// Response
-{ "status": "indexed" }
-POST /check
-
-Check a new application against existing records.
-
-json
-// Request — same structure as /index
-
-// Response
-{
-  "applicant_id": "uuid-string",
-  "flagged": true,
-  "fraud_score": 0.87,
-  "matches": [
-    {
-      "candidate_id": "existing-uuid",
-      "fraud_score": 0.87,
-      "reason": {
-        "face_similarity": 0.91,
-        "name_similarity": 0.82,
-        "address_similarity": 0.74,
-        "aadhaar_match": 1.0
-      }
-    }
-  ]
-}
-🧪 Evaluation Results
+<h3>🧪 Evaluation Results</h3>.
 Metric	Score
 Precision	91.4%
 Recall	83.7%
