@@ -1,0 +1,12 @@
+# Virtual environment
+govt/
+
+# Environment variables
+.env
+
+# Datasets
+Module1-DuplicateDetection/Datasets/
+Module1-DuplicateDetection/Database/
+C:\Users\HP\Desktop\Government Scheme Application\Government-Schemes-Fraud-Duplicate-user-Detection-\datasets&ResearchPaper
+
+
