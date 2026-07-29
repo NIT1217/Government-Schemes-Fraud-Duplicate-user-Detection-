@@ -1,12 +1,41 @@
-# Virtual environment
-govt/
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
 
-# Environment variables
+# -----------------------------
+# Virtual Environment
+# -----------------------------
+govt/
+venv/
+.venv/
+
+# -----------------------------
+# Environment Variables
+# -----------------------------
 .env
 
-# Datasets
-Module1-DuplicateDetection/Datasets/
-Module1-DuplicateDetection/Database/
-C:\Users\HP\Desktop\Government Scheme Application\Government-Schemes-Fraud-Duplicate-user-Detection-\datasets&ResearchPaper
+# -----------------------------
+# Jupyter
+# -----------------------------
+.ipynb_checkpoints/
 
+# -----------------------------
+# Datasets
+# -----------------------------
+Datasets/
+
+# -----------------------------
+# ChromaDB
+# -----------------------------
+
+Database/
+
+# -----------------------------
+# OS Files
+# -----------------------------
+.DS_Store
+Thumbs.db
 
