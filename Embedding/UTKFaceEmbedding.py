@@ -16,9 +16,9 @@ CHROMA_DB_PATH = r"./Database/FaceDB"
 
 COLLECTION_NAME = "face_embeddings"
 
-# ============================================================
+
 # LOAD CHROMADB
-# ============================================================
+
 
 print("=" * 60)
 print("Loading ChromaDB...")
@@ -31,9 +31,8 @@ collection = client.get_or_create_collection(
 
 print("ChromaDB Loaded Successfully")
 
-# ============================================================
 # LOAD INSIGHTFACE
-# ============================================================
+
 
 print("\nLoading InsightFace Model...")
 
@@ -49,23 +48,23 @@ app.prepare(
 
 print("InsightFace Loaded Successfully")
 
-# ============================================================
+
 # COUNTERS
-# ============================================================
+
 
 total_images = 0
 successful = 0
 failed = 0
 
-# ============================================================
+
 # VALID IMAGE EXTENSIONS
-# ============================================================
+
 
 VALID_EXTENSIONS = (".jpg", ".jpeg", ".png", ".bmp")
 
-# ============================================================
+
 # PROCESS DATASET
-# ============================================================
+
 
 print("\nStarting Embedding Extraction...\n")
 
@@ -123,9 +122,9 @@ for image_name in tqdm(image_files):
         failed += 1
         print(f"Error processing {image_name}: {e}")
 
-# ============================================================
+
 # FINAL REPORT
-# ============================================================
+
 
 print("\n" + "=" * 60)
 print("Embedding Extraction Complete")

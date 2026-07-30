@@ -2,9 +2,9 @@ import cv2
 import chromadb
 from insightface.app import FaceAnalysis
 
-# -------------------------------------------------
+
 # Configuration
-# -------------------------------------------------
+
 
 CHROMA_DB_PATH = r"C:\Users\HP\Desktop\Government Scheme Application\Government-Schemes-Fraud-Duplicate-user-Detection-\Database"
 
@@ -14,9 +14,8 @@ SIMILARITY_THRESHOLD = 0.85
 
 TOP_K = 5
 
-# -------------------------------------------------
 # Load ChromaDB (Only Once)
-# -------------------------------------------------
+
 
 print("Loading ChromaDB...")
 
@@ -26,9 +25,8 @@ collection = client.get_collection(COLLECTION_NAME)
 
 print("ChromaDB Loaded Successfully")
 
-# -------------------------------------------------
 # Load InsightFace (Only Once)
-# -------------------------------------------------
+
 
 print("Loading InsightFace...")
 
@@ -39,19 +37,11 @@ app.prepare(ctx_id=-1)
 print("InsightFace Loaded Successfully")
 
 
-# -------------------------------------------------
 # Duplicate Detection Function
-# -------------------------------------------------
+
 
 def check_duplicate(image_path):
-    """
-    Searches the applicant against the face database.
 
-    Returns:
-        duplicate_found (bool)
-        best_similarity (float)
-        best_match (dict)
-    """
 
     # Read Image
     img = cv2.imread(image_path)
@@ -86,9 +76,8 @@ def check_duplicate(image_path):
 
     best_match = None
 
-    print("\n==============================")
     print("Top Matches")
-    print("==============================")
+
 
     for rank in range(len(ids)):
 
@@ -115,9 +104,9 @@ def check_duplicate(image_path):
     return duplicate_found, best_similarity, best_match
 
 
-# -------------------------------------------------
+
 # Testing
-# -------------------------------------------------
+
 
 if __name__ == "__main__":
 
@@ -125,9 +114,9 @@ if __name__ == "__main__":
 
     duplicate_found, similarity, best_match = check_duplicate(IMAGE_PATH)
 
-    print("\n==============================")
+
     print("Duplicate Detection Report")
-    print("==============================")
+  
 
     print("Duplicate Found :", duplicate_found)
     print("Highest Similarity :", round(similarity, 4))

@@ -10,14 +10,6 @@ print("EasyOCR Loaded Successfully")
 
 
 def extract_ocr(image_path):
-    """
-    Extracts information from an Aadhaar card.
-
-    Returns:
-        extracted_data (dict)
-        ocr_verified (bool)
-    """
-
     # Read Image
     image = cv2.imread(image_path)
 
@@ -34,9 +26,9 @@ def extract_ocr(image_path):
         text = detection[1]
         full_text += text + "\n"
 
-    # -----------------------------
+   
     # Extract Required Information
-    # -----------------------------
+
 
     aadhaar = None
     dob = None
@@ -92,9 +84,9 @@ def extract_ocr(image_path):
                 name = line
                 break
 
-    # -----------------------------
+
     # Validation
-    # -----------------------------
+
 
     errors = []
 
@@ -113,18 +105,17 @@ def extract_ocr(image_path):
     if name is None:
         errors.append("Name Missing")
 
-    # -----------------------------
+
     # Verification Result
-    # -----------------------------
+
 
     if len(errors) == 0:
         ocr_verified = True
     else:
         ocr_verified = False
 
-    # -----------------------------
     # Final Data
-    # -----------------------------
+
 
     extracted_data = {
 

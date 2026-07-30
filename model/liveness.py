@@ -3,9 +3,8 @@ import sys
 import cv2
 import numpy as np
 
-# -------------------------------------------------
 # Add Project Root
-# -------------------------------------------------
+
 project_root = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..")
 )
@@ -15,17 +14,15 @@ if project_root not in sys.path:
 
 print("Project Root:", project_root)
 
-# -------------------------------------------------
+
 # Import Silent Face Anti-Spoofing Modules
-# -------------------------------------------------
 
 from src.anti_spoof_predict import AntiSpoofPredict
 from src.generate_patches import CropImage
 from src.utility import parse_model_name
 
-# -------------------------------------------------
+
 # Load Model (Only Once)
-# -------------------------------------------------
 
 MODEL_DIR = os.path.join(project_root, "resources", "anti_spoof_models")
 
@@ -40,18 +37,10 @@ image_cropper = CropImage()
 print("Liveness Model Loaded Successfully")
 
 
-# -------------------------------------------------
+
 # Liveness Detection Function
-# -------------------------------------------------
 
 def check_liveness(image_path):
-    """
-    Checks whether the input image is Live or Spoof.
-
-    Returns:
-        score (float)
-        liveness_verified (bool)
-    """
 
     # Read Image
     image = cv2.imread(image_path)
@@ -98,9 +87,8 @@ def check_liveness(image_path):
     return score, liveness_verified
 
 
-# -------------------------------------------------
 # Testing
-# -------------------------------------------------
+
 
 if __name__ == "__main__":
 
@@ -108,9 +96,7 @@ if __name__ == "__main__":
 
     score, verified = check_liveness(IMAGE_PATH)
 
-    print("\n==============================")
     print("Liveness Detection Report")
-    print("==============================")
 
     print(f"Prediction Score : {score:.4f}")
     print(f"Liveness Verified : {verified}")

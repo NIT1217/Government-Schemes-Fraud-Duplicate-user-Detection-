@@ -5,23 +5,23 @@ import numpy as np
 from tqdm import tqdm
 from insightface.app import FaceAnalysis
 
-# -----------------------------
+
 # PATHS
-# -----------------------------
+
 LFW_PATH = r"C:\Users\HP\Desktop\Government Scheme Application\Government-Schemes-Fraud-Duplicate-user-Detection-\Datasets\LFW (Labeled Faces in the Wild)\lfw-deepfunneled"
 
 CHROMA_DB_PATH = r"./Database/FaceDB"
 COLLECTION_NAME = "face_embeddings"
 
-# -----------------------------
+
 # LOAD CHROMADB
-# -----------------------------
+
 client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
 collection = client.get_or_create_collection(name=COLLECTION_NAME)
 
-# -----------------------------
+
 # LOAD INSIGHTFACE MODEL
-# -----------------------------
+
 app = FaceAnalysis(name="buffalo_l", providers=["CPUExecutionProvider"])
 app.prepare(ctx_id=-1, det_size=(640, 640))
 
@@ -29,9 +29,9 @@ total_images = 0
 successful = 0
 failed = 0
 
-# -----------------------------
+
 # CREATE EMBEDDINGS
-# -----------------------------
+
 for person_name in tqdm(os.listdir(LFW_PATH), desc="Processing LFW"):
 
     person_folder = os.path.join(LFW_PATH, person_name)
@@ -83,9 +83,9 @@ for person_name in tqdm(os.listdir(LFW_PATH), desc="Processing LFW"):
             failed += 1
             print(f"Error: {image_path} -> {e}")
 
-# -----------------------------
+
 # FINAL STATS
-# -----------------------------
+
 print("\nEmbedding Extraction Complete")
 print("=" * 40)
 print(f"Total Images : {total_images}")
