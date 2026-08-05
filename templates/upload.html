@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Scheme's Fraud Duplicater</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href={{url_for("static", filename="upload.css")}}>
+</head>
+<body>
+
+    <h1>Document Upload </h1><br>
+    <form action={{url_for("upload")}}  method="POST" enctype="multipart/form-data">
+
+    <label for="image">Upload Image:</label>
+
+    <input
+        type="file"
+        id="image"
+        name="IDProof"
+        accept="image/*"
+        required><br><br>
+
+    <label for="selfie"> UPLOAD YOUR PICTURE</label>
+    <input type="file" id="selfie" name="selfie" accept="image/*" required><br><br>
+
+    <button type="submit">Upload</button>
+   </form>
+
+
+</body>
+</html>
