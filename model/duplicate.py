@@ -104,27 +104,3 @@ def check_duplicate(image_path):
     return duplicate_found, best_similarity, best_match
 
 
-
-# Testing
-
-
-if __name__ == "__main__":
-
-    IMAGE_PATH = r"C:\Users\HP\Desktop\Government Scheme Application\Government-Schemes-Fraud-Duplicate-user-Detection-\testdata\images (1).jpg"
-
-    duplicate_found, similarity, best_match = check_duplicate(IMAGE_PATH)
-
-
-    print("Duplicate Detection Report")
-  
-
-    print("Duplicate Found :", duplicate_found)
-    print("Highest Similarity :", round(similarity, 4))
-
-    if best_match:
-
-        print("\nMatched Person")
-        print("---------------------")
-        print("Person :", best_match["person"])
-        print("Dataset :", best_match["dataset"])
-        print("Image :", best_match["image"])

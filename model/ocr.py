@@ -133,15 +133,3 @@ def extract_ocr(image_path):
     }
 
     return extracted_data, ocr_verified
-
-
-
-if __name__ == "__main__":
-
-    IMAGE_PATH = r"C:\Users\HP\Desktop\Government Scheme Application\Government-Schemes-Fraud-Duplicate-user-Detection-\testdata\sahiba adharCard.jpg"
-
-    data, verified = extract_ocr(IMAGE_PATH)
-
-    print(json.dumps(data, indent=4))
-
-    print("\nOCR Verified:", verified)

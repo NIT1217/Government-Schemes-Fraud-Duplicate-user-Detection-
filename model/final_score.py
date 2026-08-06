@@ -1,9 +1,9 @@
 import json
 
-from ocr import extract_ocr
-from verify_face import verify_face
-from liveness import check_liveness
-from duplicate import check_duplicate
+from model.ocr import extract_ocr
+from model.verify_face import verify_face
+from model.liveness import check_liveness
+from model.duplicate import check_duplicate
 
 
 # Fraud Score Calculator
@@ -86,25 +86,3 @@ def calculate_fraud_score(selfie_path, document_path):
     }
 
     return report
-
-
-# Testing
-# -------------------------------------------------
-
-if __name__ == "__main__":
-
-    SELFIE_IMAGE = r"Government-Schemes-Fraud-Duplicate-user-Detection-/testdata/PAN proof/patel PAN.jpg"
-
-    DOCUMENT_IMAGE = r"Government-Schemes-Fraud-Duplicate-user-Detection-/testdata/PAN proof/patel PAN.jpg"
-
-    report = calculate_fraud_score(
-
-        SELFIE_IMAGE,
-
-        DOCUMENT_IMAGE
-
-    )
-   
-    
-    print("FINAL FRAUD DETECTION REPORT")
-    print(json.dumps(report, indent=4))

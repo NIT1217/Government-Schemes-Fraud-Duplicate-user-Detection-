@@ -3,16 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Government Scheme's Fraud Duplicater</title>
-   
-    <link rel="stylesheet" href={{url_for("static",filename="predict.css")}}>
+    <title>Prediction Result</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='predict.css') }}">
 </head>
 <body>
 
-    <h1>PREDICTION SCORE</h1><br>
-<div>
-    <p1> THE FROUD SCORE IS: </p1><br><br>
-    <p1>THE DUPLICATION CHANCE IS:  </p1>
+<h1>PREDICTION SCORE</h1>
+
+<div class="result-card">
+
+    <p>
+        Fraud Score :
+        <span class="score">{{ report.fraud_score }}</span>
+    </p>
+
+    <p>
+        Risk Level :
+        <span class="{{ report.risk_level|lower }}">
+            {{ report.risk_level }}
+        </span>
+    </p>
+
+    <p>
+        Face Verified :
+        <span>{{ report.face_verified }}</span>
+    </p>
+
+    <p>
+        Liveness Verified :
+        <span>{{ report.liveness_verified }}</span>
+    </p>
+
+    <p>
+        Duplicate Found :
+        <span>{{ report.duplicate_found }}</span>
+    </p>
+
+    <p>
+        Matched Person :
+        <span>{{ report.matched_person }}</span>
+    </p>
 
 </div>
 

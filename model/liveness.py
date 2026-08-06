@@ -87,21 +87,3 @@ def check_liveness(image_path):
     return score, liveness_verified
 
 
-# Testing
-
-
-if __name__ == "__main__":
-
-    IMAGE_PATH = r"C:\Users\HP\Desktop\Government Scheme Application\Government-Schemes-Fraud-Duplicate-user-Detection-\testdata\AiDogimge.jpg"
-
-    score, verified = check_liveness(IMAGE_PATH)
-
-    print("Liveness Detection Report")
-
-    print(f"Prediction Score : {score:.4f}")
-    print(f"Liveness Verified : {verified}")
-
-    if verified:
-        print("Status : LIVE PERSON")
-    else:
-        print("Status : SPOOF DETECTED")
